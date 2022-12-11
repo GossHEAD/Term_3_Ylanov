@@ -1,0 +1,303 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import ScrollView kivy.uix.scrollview
+<ItemLabel_Left@Label>:
+    font_size: '20sp'
+    halign: 'left'
+    valign: 'middle'
+    text_size: self.size
+<ItemLabel_Right@Label>:
+    font_size: '20sp'
+    #halign: 'right'
+    #valign: 'middle'
+    text_size: self.size
+
+<IntInput@TextInput>:
+    font_size: '20sp'
+    multiline: False
+    input_type: 'number'
+    size_hint: (None,0.5)
+    input_filter: 'int'
+
+<ScreenManagment>:
+    transition: FadeTransition()
+    StartPage:
+        id: root.screen1
+        name: 'Сортировки'
+    EffectivePage:
+        id: root.screen2
+        name: 'Эффективность'
+
+<StartPage>:
+    #cols: 4
+    name: "ui"
+    spin: spin
+    button_start: button_start
+    text_input_count: text_input_count
+    text_input_st: text_input_st
+    text_input_ed: text_input_ed
+
+    time_bubble: time_bubble
+    time_quick: time_quick
+    time_insert: time_insert
+    time_select: time_select
+
+    coc_bubble: coc_bubble
+    coc_quick: coc_quick
+    coc_insert: coc_insert
+    coc_select: coc_select
+
+    coch_bubble: coch_bubble
+    coch_quick: coch_quick
+    coch_insert: coch_insert
+    coch_select: coch_select
+
+    ScrollView:
+        #size_hint_y: .72
+    	#pos_hint: {'x':0, 'y': .11}
+        do_scroll_x: False
+        do_scroll_y: True
+        GridLayout:
+            cols: 2
+            GridLayout:
+                rows: 4
+                size_hint: 0.5, None
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 1, None
+                    padding:10
+                    pos_hint: {"left": 1, "top": 1}
+                    spacing: 10
+                    ItemLabel_Left:
+                        text: "Размер массива:"
+                        font_size: '18sp'
+                    IntInput:
+                        id: text_input_count
+
+                #2
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 1, None
+                    padding:10
+                    pos_hint: {"right": 1, "top": 0.7}
+                    spacing: 10
+                    ItemLabel_Right:
+                        text: "от:"
+
+                    IntInput:
+                        id: text_input_st
+                        font_size: '20sp'
+                        multiline: False
+                        input_type: 'number'
+                        input_filter: 'int'
+
+                    ItemLabel_Right:
+                        text: "до:"
+
+                    IntInput:
+                        id: text_input_ed
+                        font_size: '20sp'
+                        multiline: False
+                        input_type: 'number'
+                        input_filter: 'int'
+
+
+                #3
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: [10, 10, 10, 10]
+                    pos_hint: {"left": 1, "top": 0.5}
+                    size_hint: 0.4, None
+                    ItemLabel_Left:
+                        text: "Выбор массива:"
+                    Spinner:
+                        id: spin
+                        size_hint: 0.5, 0.4
+                        text: 'Chaos'
+                        values: 'Reversed', 'Chaos', 'Half-Sorted', 'Sorted'
+
+
+                #4
+                GridLayout:
+                    padding:[10, 0, 10, 10]
+                    size_hint: None, None
+                    cols: 1
+                    Button:
+                        id: button_start
+                        halign: 'center'
+                        valign: 'middle'
+                        text_size: self.size
+                        text: "Go"
+                        font_size: 20
+                        on_release:
+                            root.start()
+            GridLayout:
+                rows: 4
+                size_hint: 0.5, None
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: [10, 2, 10, 10]
+                    pos_hint: {"left": None, "top": None}
+                    size_hint: 1, None
+                    ItemLabel_Left:
+                        text: "Bubble"
+                    ItemLabel_Left:
+                        text: "Quick"
+                    ItemLabel_Left:
+                        text: "Insert"
+                    ItemLabel_Left:
+                        text: "Select"
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: [10, 10, 10, 10]
+                    pos_hint: {"left": None, "top": None}
+                    size_hint: 1, None
+                    ItemLabel_Left:
+                        id: time_bubble
+                        text: ""
+                    ItemLabel_Left:
+                        id: time_quick
+                        text: ""
+                    ItemLabel_Left:
+                        id: time_insert
+                        text: ""
+                    ItemLabel_Left:
+                        id: time_select
+                        text: ""
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: [10, 10, 10, 10]
+                    pos_hint: {"left": None, "top": None}
+                    size_hint: 1, None
+                    ItemLabel_Left:
+                        id: coc_bubble
+                        text: ""
+                    ItemLabel_Left:
+                        id: coc_quick
+                        text: ""
+                    ItemLabel_Left:
+                        id: coc_insert
+                        text: ""
+                    ItemLabel_Left:
+                        id: coc_select
+                        text: ""
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: [10, 10, 10, 10]
+                    pos_hint: {"left": None, "top": None}
+                    size_hint: 1, None
+                    ItemLabel_Left:
+                        id: coch_bubble
+                        text: ""
+                    ItemLabel_Left:
+                        id: coch_quick
+                        text: ""
+                    ItemLabel_Left:
+                        id: coch_insert
+                        text: ""
+                    ItemLabel_Left:
+                        id: coch_select
+                        text: ""
+
+
+
+<EffectivePage>:
+    name: "anal"
+    #time_anal = ['time_sorted','time_chaos', 'time_half_sorted', 'time_reversed']
+    time_sorted: time_sorted
+    time_chaos: time_chaos
+    time_half_sorted: time_half_sorted
+    time_reversed: time_reversed
+    coc_sorted: coc_sorted
+    coc_chaos: coc_chaos
+    coc_half_sorted: coc_half_sorted
+    coc_reversed: coc_reversed
+    item_label_name: item_label_name
+    GridLayout:
+        rows: 6
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: [10, 2, 10, 10]
+            pos_hint: {"left": None, "top": None}
+            size_hint: 1, None
+            ItemLabel_Left:
+                id: item_label_name
+                text: "name"
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: [10, 2, 10, 10]
+            pos_hint: {"left": None, "top": None}
+            size_hint: 1, None
+            ItemLabel_Left:
+                text: "Bubble"
+            ItemLabel_Left:
+                text: "Quick"
+            ItemLabel_Left:
+                text: "Insert"
+            ItemLabel_Left:
+                text: "Select"
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: [10, 10, 10, 10]
+            pos_hint: {"left": None, "top": None}
+            size_hint: 1, None
+            ItemLabel_Left:
+                id: time_sorted
+                text: "time"
+            ItemLabel_Left:
+                id: time_chaos
+                text: "time"
+            ItemLabel_Left:
+                id: time_half_sorted
+                text: "time"
+            ItemLabel_Left:
+                id: time_reversed
+                text: "time"
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: [10, 10, 10, 10]
+            pos_hint: {"left": None, "top": None}
+            size_hint: 1, None
+            ItemLabel_Left:
+                id: coc_sorted
+                text: "CoC"
+            ItemLabel_Left:
+                id: coc_chaos
+                text: "CoC"
+            ItemLabel_Left:
+                id: coc_half_sorted
+                text: "CoC"
+            ItemLabel_Left:
+                id: coc_reversed
+                text: "CoC"
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: [10, 10, 10, 10]
+            pos_hint: {"left": None, "top": None}
+            size_hint: 1, None
+            ItemLabel_Left:
+                #id: coc_sorted
+                text: "CoCh"
+            ItemLabel_Left:
+                #id: coc_chaos
+                text: "CoCh"
+            ItemLabel_Left:
+                #id: coc_half_sorted
+                text: "CoCh"
+            ItemLabel_Left:
+                #id: coc_reversed
+                text: "CoCh"
+        BoxLayout:
+            orientation: 'horizontal'
+            #pos_hint: {"right": 1, "top": 1}
+            padding:[10, 10, 10, 10]
+            size_hint: None, None
+            Button:
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                text: "Go Back"
+                font_size: 20
+                pos_hint: {"left": 1, "down": 1}
+                on_release:
+                    root.manager.current = "Сортировки"
+
